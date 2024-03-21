@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -35,7 +36,32 @@ class LiteraturePrize {
         return sb.toString();
     }
 
-    
+}
+
+class NotAwarded {
+    private String year;
+    private String reason;
+
+    public NotAwarded(String year, String reason) {
+        this.year = year;
+        this.reason = reason;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Year: ").append(year).append("\n");
+        sb.append("Reason: ").append(reason).append("\n");
+        return sb.toString();
+    }
 }
 
 class Laureate {
@@ -47,7 +73,8 @@ class Laureate {
     private String citation;
     private String genre;
 
-    public Laureate(String name, String birthYear, String deathYear, String nationality, String language, String citation, String genre){
+    public Laureate(String name, String birthYear, String deathYear, String nationality, String language,
+            String citation, String genre) {
         this.name = name;
         this.birthYear = birthYear;
         this.deathYear = deathYear;
@@ -57,7 +84,7 @@ class Laureate {
         this.genre = genre;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
@@ -101,7 +128,7 @@ public class ApplicationRunner {
     private static List<LiteraturePrize> prizes = new ArrayList<>();
 
     public static void main(String[] args) {
-        
+
         String fileLocation = System.getProperty("user.dir");
         String dataPath = fileLocation + File.separator + "Task1" + File.separator + "literature-prizes.txt";
         loadPrizes(dataPath);
@@ -117,37 +144,47 @@ public class ApplicationRunner {
                 String[] lines = parts[i].split("\n");
                 // System.out.println(lines[2]);
 
-                System.out.println(lines.length); 
-
-                // // System.out.println(parts[3]);
-
-                // // check to see if the year is in the given array
-                // int[] yearsNotAwarded = {1914, 1918, 1935, 1940, 1941, 1942, 1943, 1944, 1945};
-                
-                // for (int year : yearsNotAwarded) {
-                //     if (lines[1].contains(String.valueOf(year))) {
-                //         // System.out.println("Not awarded");
-                //     }
-           
-                // }
+                if (lines.length == 3) {
+                    // NotAwarded notAwarded = new NotAwarded(lines[1], lines[2]);
+                    // System.out.println(notAwarded);
+                } else if (lines.length == 8) {
+                    System.out.println(lines[3]);
+                    System.out.println(lines[6]);
 
 
+                } else {
+                    // String[] data = lines[2].split("\\|"); // Use pipe as delimiter
 
-                // String[] data = lines[2].split("\\|"); // Use pipe as delimiter
+                    // String nameAndYears = data[0];
+                    // String nationality = data[1];
+                    // String language = data[2];
 
-                // String nameAndYears = data[0];
-                // String nationality = data[1];
-                // String language = data[2];
+                    // String[] nameAndYearsData = nameAndYears.split("\\s\\("); // Split name and years
+                    // String name = nameAndYearsData[0];
+                    // // System.out.println(nameAndYearsData[1].length());
+                    // System.out.println(name);
 
-                // String[] nameAndYearsData = nameAndYears.split("\\s\\("); // Split name and years
-                // String name = nameAndYearsData[0];
-                // String[] years = nameAndYearsData[1].replace(")", "").split("-"); // Remove closing parenthesis and split years
+                    // if(nameAndYearsData[1].length() > 8) {
+                    //     String[] years = nameAndYearsData[1].replace(")", "").split("-"); // Remove closing parenthesis and
+                    //     String yearBorn = years[0];
+                    //     String yearDied = years[1];
+                    //     System.out.println("Birthplace: " + yearBorn);
+                    // } else{
+                        
+                    //     String yearBorn = nameAndYearsData[1].replace(")", "");
+                    //     yearBorn = yearBorn.replace("b. ", "");
+                    //     System.out.println("Birthplace: " + yearBorn);
+                    // }
+                    // // System.out.println(years);
+                    // // split years
+                    // // String yearBorn = years[0];
+                    // // String yearDied = years[1];
+                    // // System.out.println("Birthplace: " + yearBorn);
 
-                // String yearBorn = years[0];
-                // String yearDied = years[1];
-                // System.out.println("Birthplace: " + yearBorn);
+                    // System.out.println(lines[3]);
+                }
 
-                    // Continue processing data...
+                // Continue processing data...
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -189,13 +226,14 @@ public class ApplicationRunner {
             }
         } while (!choice.equals("0"));
     }
+
     private static void listPrizes() {
         // Implement the functionality to list all prizes
         for (LiteraturePrize prize : prizes) {
             System.out.println(prize);
         }
     }
-    
+
     private static void selectPrize() {
         // Implement the functionality to select a prize
         Scanner scanner = new Scanner(System.in);
@@ -208,7 +246,7 @@ public class ApplicationRunner {
             }
         }
     }
-    
+
     private static void searchPrizes() {
         // Implement the functionality to search for prizes
         Scanner scanner = new Scanner(System.in);
@@ -221,6 +259,5 @@ public class ApplicationRunner {
             }
         }
     }
-    
-}
 
+}
