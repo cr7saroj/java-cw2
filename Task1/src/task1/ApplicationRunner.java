@@ -115,7 +115,21 @@ public class ApplicationRunner {
 
             for (int i = 1; i < parts.length; i++) {
                 String[] lines = parts[i].split("\n");
-                System.out.println(lines[1]);
+                // System.out.println(lines[2]);
+
+                System.out.println(lines.length); 
+
+                // // System.out.println(parts[3]);
+
+                // // check to see if the year is in the given array
+                // int[] yearsNotAwarded = {1914, 1918, 1935, 1940, 1941, 1942, 1943, 1944, 1945};
+                
+                // for (int year : yearsNotAwarded) {
+                //     if (lines[1].contains(String.valueOf(year))) {
+                //         // System.out.println("Not awarded");
+                //     }
+           
+                // }
 
 
 
@@ -131,6 +145,7 @@ public class ApplicationRunner {
 
                 // String yearBorn = years[0];
                 // String yearDied = years[1];
+                // System.out.println("Birthplace: " + yearBorn);
 
                     // Continue processing data...
             }
